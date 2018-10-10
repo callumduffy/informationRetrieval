@@ -2,3 +2,4 @@
 .recommenders
 /.metadata/
 /.recommenders
+.metadata/*

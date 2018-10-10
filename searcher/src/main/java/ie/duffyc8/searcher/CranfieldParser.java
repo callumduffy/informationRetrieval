@@ -24,14 +24,12 @@ import org.apache.lucene.store.FSDirectory;
 public class CranfieldParser {
     
     private Analyzer analyzer;
-    private Directory directory;
 
 	public CranfieldParser(String indexDirectory)throws IOException{
         this.analyzer = new StandardStemAnalyzer();
-        this.directory = FSDirectory.open(Paths.get(indexDirectory));
 	}
 
-	public void processFile(String inputFile, String outputDirectory) throws IOException {
+	public void processFile(String inputFile, String outputDirectory, Directory directory) throws IOException {
 		BufferedReader bufferedReader = null;
 		String line;
 		boolean firstFile = true;
@@ -109,8 +107,4 @@ public class CranfieldParser {
 			return "";
 		}
 	}
-	
-	public void shutdown() throws IOException {
-        directory.close();
-    }
 }
