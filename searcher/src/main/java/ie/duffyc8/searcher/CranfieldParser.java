@@ -7,50 +7,50 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Paths;
+
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.FieldType;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
 
 public class CranfieldParser {
+    
+    private Analyzer analyzer;
+    private Directory directory;
 
-	private static class Splitter extends Thread {
-		String inputFile;
-		String outputDirectory;
-
-		Splitter(String inputFile, String outputDirectory) {
-			super();
-			this.inputFile = inputFile;
-			this.outputDirectory = outputDirectory;
-		}
-
-		public void run() {
-			processFile(inputFile, outputDirectory);
-		}
+	public CranfieldParser(String indexDirectory)throws IOException{
+        this.analyzer = new StandardStemAnalyzer();
+        this.directory = FSDirectory.open(Paths.get(indexDirectory));
 	}
 
-	public static void main(String[] args) {
-
-		if (args.length != 3) {
-			System.err.println("Usage: java CranfieldSplitter input_directory documents_output_directory queries_output_directory" + args.length);
-			System.exit(1);
-		}
-
-		String inputDirectory = args[0];
-		Splitter documents_splitter = new Splitter(inputDirectory + "cran.all.1400", args[1]);
-		documents_splitter.start();
-		Splitter queries_splitter = new Splitter(inputDirectory + "cran.qry", args[2]);
-		queries_splitter.start();
-
-		try {
-			documents_splitter.join();
-			queries_splitter.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void processFile(String inputFile, String outputDirectory) {
+	public void processFile(String inputFile, String outputDirectory) throws IOException {
 		BufferedReader bufferedReader = null;
 		String line;
-		String output = "";
+		boolean firstFile = true;
 		Integer counter = 1;
+		Document doc = new Document();
+		String type = "";
+		
+		// Create a new field type which will store term vector information
+        FieldType ft = new FieldType(TextField.TYPE_STORED);
+        ft.setTokenized(true); //done as default
+        ft.setStoreTermVectors(true);
+        ft.setStoreTermVectorPositions(true);
+        ft.setStoreTermVectorOffsets(true);
+        ft.setStoreTermVectorPayloads(true);
+
+        // create and configure an index writer
+        IndexWriterConfig config = new IndexWriterConfig(analyzer);
+        config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
+        IndexWriter iwriter = new IndexWriter(directory, config);
 
 		try {
 			bufferedReader = new BufferedReader(new FileReader(new File(inputFile)));
@@ -59,20 +59,25 @@ public class CranfieldParser {
 			while ((line = bufferedReader.readLine()) != null) {
 				
 				if(line.startsWith(".I")){
-					System.out.println("file: " + counter);
-					writeOutput(outputDirectory + counter.toString() + ".txt", output);
+					if(!firstFile){
+						iwriter.addDocument(doc);
+					}
+					doc = new Document();
+					firstFile =false;
+					doc.add(new StringField("fileNumber", counter.toString(), Field.Store.YES));
+					
+					System.out.printf("Indexing \"%s\"\n", counter);
 					counter++;
-					output = "";
 				}
-				else if(isMetaData(line)){
-					//do nothing
+				else if(getLineType(line)==""){
+					doc.add(new Field(type, line, ft));
 				}
 				else{
-					output = output + line + System.getProperty("line.separator");
+					type = getLineType(line);
 				}
 			}
-			writeOutput(outputDirectory + counter.toString() + ".txt", output);
 			bufferedReader.close();
+	        iwriter.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -87,24 +92,25 @@ public class CranfieldParser {
 		}
 	}
 	
-	public static boolean isMetaData(String line){
-		if(line.startsWith(".T") || line.startsWith(".A") || line.startsWith(".B") || line.startsWith(".W") ){
-			return true;
+	private String getLineType(String line){
+		if(line.startsWith(".T")){
+			return "title";
 		}
-		return false;
-	}
-
-	public static void writeOutput(String outputFileName, String output) throws IOException {
-		final File outputDirectory = new File(outputFileName);
-
-		if (!outputDirectory.exists()) {
-			outputDirectory.createNewFile();
+		else if(line.startsWith(".A")){
+			return "author";
 		}
-
-		Writer fileWriter = new FileWriter(outputDirectory);
-		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-		bufferedWriter.write(output);
-		bufferedWriter.close();
-		fileWriter.close();
+		else if(line.startsWith(".B")){
+			return "bibliography";
+		}
+		else if (line.startsWith(".W") ){
+			return "contents";
+		}
+		else{
+			return "";
+		}
 	}
+	
+	public void shutdown() throws IOException {
+        directory.close();
+    }
 }

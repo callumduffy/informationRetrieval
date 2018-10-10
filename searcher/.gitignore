@@ -1,3 +1,6 @@
+.metadata/
+.settings/
+index/
 corpus/*.txt
 query/*.txt
 target/

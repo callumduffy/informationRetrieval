@@ -1,0 +1,18 @@
+Indexing: Represent the text in IO's so they can be searched with a query
+	automatic indexing: do this w/out human intervention.
+
+Text-based Indexing: turns text into machine readable/usable form
+	index used to assess relevance of a document to a user query
+
+Indexing Effectiveness Params:
+	Index Exhaustivity: degree in which content of document is recognised and represented by the indexing system.
+	term Specificity: Breadth of terms used to describe a document
+		ie. broad terms retrieve more docs, narrows words => fewer
+
+Indexing Components:
+	Tokenisation: Splitting doc into words/terms
+	->Types:Term Normalisation:upper/lower case removal, hyphen removal
+		Stop-Word Removal: remove v common words
+		Stemming: Reduce variation in words
+	
+	Term Weighting: Deciding which words describe doc the best
