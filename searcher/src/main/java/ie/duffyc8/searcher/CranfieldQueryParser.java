@@ -33,6 +33,7 @@ public class CranfieldQueryParser {
 		String line;
 		String querystring = "";
 		ArrayList<String> strings = new ArrayList<>();
+		int count =1;
 		
 		try{
 			bufferedReader = new BufferedReader(new FileReader(new File(inputFile)));
@@ -40,7 +41,9 @@ public class CranfieldQueryParser {
 
 			while ((line = bufferedReader.readLine()) != null) {
 				if(line.startsWith(".I")){
-					System.out.println("line: " + querystring);
+					System.out.println();
+					System.out.println("line: " + count + ": " + querystring);
+					count++;
 					strings.add(querystring);
 				}
 				else if(line.startsWith(".W")){
@@ -53,6 +56,8 @@ public class CranfieldQueryParser {
 					querystring += line +  " ";
 				}
 			}
+			//add 225th query
+			strings.add(querystring);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

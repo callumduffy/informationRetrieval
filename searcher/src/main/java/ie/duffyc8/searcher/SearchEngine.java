@@ -2,9 +2,8 @@ package ie.duffyc8.searcher;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -36,7 +35,7 @@ public class SearchEngine {
     public static int BM_25 = 1;
     
  // Limit the number of search results we get
- 	private static int MAX_RESULTS = 30;
+ 	private static int MAX_RESULTS = 20;
     
     private static Directory indexDirectory;
     private static Directory queryDirectory;
@@ -85,36 +84,47 @@ public class SearchEngine {
     		System.out.println("Invalid scoring integer param.");
     	}
     	
-    	for(String querystring : querystrings){
-    		query = queryParser.parseQuery(querystring);
-    		
-    		ScoreDoc[] hits = isearcher.search(query, MAX_RESULTS).scoreDocs;
+    	File fout = new File("search_results.txt");
+	     
+    	 BufferedWriter bw = new BufferedWriter(new FileWriter(fout));
+    	
+    	try{
+        	for(String querystring : querystrings){
+        		query = queryParser.parseQuery(querystring);
+        		
+        		ScoreDoc[] hits = isearcher.search(query, MAX_RESULTS).scoreDocs;
 
-    		//write results to file for eval
-    		writeResultsFile(hits, isearcher, queryIndex, type);
-    		
-			queryIndex++;
+        		//write results to file for eval
+        		writeResultsFile(hits, isearcher, queryIndex, type, bw);
+        		
+    			queryIndex++;
+        	}
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	} finally {
+    		try{
+    			bw.close();
+    		}catch(Exception e){
+    			
+    		}
     	}
     }
     
-    public static void writeResultsFile(ScoreDoc[] hits, IndexSearcher isearcher, int queryIndex, int type) throws IOException{
-    	
-    	File fout = new File("search_results.txt");
-    	FileOutputStream fos = new FileOutputStream(fout);
-     
-    	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+    public static void writeResultsFile(ScoreDoc[] hits, IndexSearcher isearcher, int queryIndex,
+    		int type, BufferedWriter bw) throws IOException{
      
     	//format = Query 0 FileNum Rank(0-30) Score 'EXP'
     	for (int i = 0; i < hits.length; i++) {
     		Document hitDoc = isearcher.doc(hits[i].doc);
     		String line = (queryIndex) + " 0 " + hitDoc.get("fileNumber") + " " + (i+1) + " "
-    				+ normaliseScore(hits[i].score, type) + " EXP";
+    				+ normaliseScore(hits[i].score, type) + " EXP" +" \n";
     		bw.write(line);
-    		bw.newLine();
     		System.out.println(line);
     	}
      
-    	bw.close();
+    	if(queryIndex == 225){
+    		bw.close();
+    	}
     }
     
     public static int normaliseScore(float score, int type){

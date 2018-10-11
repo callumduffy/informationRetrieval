@@ -64,7 +64,7 @@ public class CranfieldParser {
 					firstFile =false;
 					doc.add(new StringField("fileNumber", counter.toString(), Field.Store.YES));
 					
-					System.out.printf("Indexing \"%s\"\n", counter);
+					//System.out.printf("Indexing \"%s\"\n", counter);
 					counter++;
 				}
 				else if(getLineType(line)==""){
