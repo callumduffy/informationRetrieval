@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
@@ -17,8 +19,8 @@ public class CranfieldQueryParser {
 	
 	public CranfieldQueryParser(Analyzer analyzer){
 		 parser = new MultiFieldQueryParser(
-                new String[]{"title", "contents", "author"},
-                analyzer);
+                new String[]{"title", "contents","bibl","author"},
+                analyzer, boost());
 	}
 	
 	public Query parseQuery(String querystring) throws ParseException{
@@ -45,8 +47,10 @@ public class CranfieldQueryParser {
 					querystring ="";
 				}
 				else{
-					line.replace('\n', ' ');
-					querystring += line;
+					if(line.contains("?")){
+						line = line.replace("?","");
+					}
+					querystring += line +  " ";
 				}
 			}
 			
@@ -62,5 +66,14 @@ public class CranfieldQueryParser {
 				}
 		}
 		return strings;
+	}
+	
+	public static Map<String, Float> boost(){
+		Map<String, Float> boostMap = new HashMap();
+		boostMap.put("title", (float) 0.48);
+		boostMap.put("author", (float) 0.1);
+		boostMap.put("bibl", (float) 0.04);
+		boostMap.put("contents", (float) 0.38);
+		return boostMap;
 	}
 }
