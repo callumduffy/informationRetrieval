@@ -35,7 +35,7 @@ public class SearchEngine {
     public static int BM_25 = 1;
     
  // Limit the number of search results we get
- 	private static int MAX_RESULTS = 20;
+ 	private static int MAX_RESULTS = 30;
     
     private static Directory indexDirectory;
     private static Directory queryDirectory;
