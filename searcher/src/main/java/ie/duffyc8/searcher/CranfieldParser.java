@@ -61,30 +61,30 @@ public class CranfieldParser {
 				
 				if(type == "index"){
 					if(!firstFile){
-						System.out.println(counter + ": contents : " + data);
+//						System.out.println(counter + ": contents : " + data);
 						doc.add(new Field("contents", data, ft));
 						iwriter.addDocument(doc);
 					}
 					firstFile =false;
 					doc = new Document();
-					doc.add(new StringField("fileNumber", counter.toString(), Field.Store.YES));
+					doc.add(new StringField("fileNumber", line.substring(3), Field.Store.YES));
 					counter++;
 				}
 				else if(type == "title"){
 					data ="";
 				}
 				else if(type == "author"){
-					System.out.println(counter + ": title : " + data);
+//					System.out.println(counter + ": title : " + data);
 					doc.add(new Field("title", data, ft));
 					data="";
 				}
 				else if(type == "bibliography"){
-					System.out.println(counter + ": author : " + data);
+					//System.out.println(counter + ": author : " + data);
 					doc.add(new Field("author", data, ft));
 					data="";
 				}
 				else if(type == "contents"){
-					System.out.println(counter + ": bibliography : " + data);
+					//System.out.println(counter + ": bibliography : " + data);
 					doc.add(new Field("bibliography", data, ft));
 					data="";
 				}
@@ -94,11 +94,12 @@ public class CranfieldParser {
 			}
 			
 			//add final file
-			System.out.println(counter + ": contents : " + data);
+			//System.out.println(counter + ": contents : " + data);
 			doc.add(new Field("contents", data, ft));
 			iwriter.addDocument(doc);
 			
 			bufferedReader.close();
+			System.out.println("closing writer");
 	        iwriter.close();
 		}
 		catch (IOException e) {
