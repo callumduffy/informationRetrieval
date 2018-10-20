@@ -1209,3 +1209,7 @@
 2018-10-20 09:09:05,542 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2018-10-20 09:09:05,542 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\test\resources
 2018-10-20 10:22:39,358 [main] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is out-of-date. Remote download required.
+2018-10-20 10:55:27,443 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-20 10:55:27,445 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\main\resources
+2018-10-20 10:55:27,467 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-20 10:55:27,468 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\test\resources

@@ -59,8 +59,8 @@ public class SearchEngine {
     	querystrings = queryParser.readFile(CORPUS_DIRECTORY + "/cran.qry");
     	
     	//score the docs, leave one you want uncommented
-    	//scoreDocs(BM_25, querystrings);
-    	scoreDocs(VECTOR_SPACE_MODEL, querystrings);
+    	scoreDocs(BM_25, querystrings);
+    	//scoreDocs(VECTOR_SPACE_MODEL, querystrings);
     	
     	//at end
     	shutdown();
