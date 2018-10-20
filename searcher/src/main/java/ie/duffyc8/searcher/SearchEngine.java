@@ -117,44 +117,13 @@ public class SearchEngine {
     	for (int i = 0; i < hits.length; i++) {
     		Document hitDoc = isearcher.doc(hits[i].doc);
     		String line = (queryIndex) + " 0 " + hitDoc.get("fileNumber") + " " + (i+1) + " "
-    				+ normaliseScore(hits[i].score, type) + " EXP" +" \n";
+    				+ hits[i].score + " EXP" +" \n";
     		bw.write(line);
     		System.out.println(line);
     	}
      
     	if(queryIndex == 225){
     		bw.close();
-    	}
-    }
-    
-    public static int normaliseScore(float score, int type){
-    	if(type == BM_25){
-    		if(score >= 12.5){
-        		return 5;
-        	}
-        	else if(score >= 10){
-        		return 4;
-        	}
-        	else if(score >= 8){
-        		return 3;
-        	}
-        	else if(score >= 6){
-        		return 2;
-        	}
-        	else if(score >= 4.5){
-        		return 1;
-        	}
-        	else{
-        		return 0;
-        	}
-    	}
-    	else{
-    		if(score>=5){
-    			return 5;
-    		}
-    		else{
-    			return Math.round(score);
-    		}
     	}
     }
     

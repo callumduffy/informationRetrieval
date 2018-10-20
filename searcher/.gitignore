@@ -1,8 +1,6 @@
 .metadata/
 .settings/
 index/
-corpus/*.txt
-query/*.txt
 target/
 pom.xml.tag
 pom.xml.releaseBackup

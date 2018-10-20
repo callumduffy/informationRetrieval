@@ -1,2 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.nio.file.Files"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.custom.CustomAnalyzer"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.standard.StandardTokenizerFactory"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.standard.StandardFilterFactory"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.core.LowerCaseFilterFactory"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.core.StopFilterFactory"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.util.ClasspathResourceLoader"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.AnalyzerWrapper"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.core.TypeTokenFilter"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="junit.runner.Version"/>
+<fullyQualifiedTypeName name="org.apache.lucene.search.PhraseQuery"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.Analyzer.TokenStreamComponents"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.StopwordAnalyzerBase"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.Tokenizer"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.standard.StandardTokenizer"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="java.nio.file.Paths"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.TokenStream"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.en.EnglishPossessiveFilter"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.LowerCaseFilter"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.StopFilter"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.en.PorterStemFilter"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.standard.StandardFilter"/>
+<fullyQualifiedTypeName name="org.apache.lucene.queryparser.classic.QueryParser"/>
+<fullyQualifiedTypeName name="org.apache.lucene.analysis.Analyzer"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.apache.lucene.queryparser.classic.MultiFieldQueryParser"/>
+<fullyQualifiedTypeName name="org.apache.lucene.util.Version"/>
+<fullyQualifiedTypeName name="org.apache.lucene.search.similarities.BM25Similarity"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="org.apache.lucene.search.similarities.TFIDFSimilarity"/>
+<fullyQualifiedTypeName name="org.apache.lucene.search.similarities.ClassicSimilarity"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+<fullyQualifiedTypeName name="java.io.OutputStreamWriter"/>
+<fullyQualifiedTypeName name="java.io.FileWriter"/>
+</qualifiedTypeNameHistroy>
