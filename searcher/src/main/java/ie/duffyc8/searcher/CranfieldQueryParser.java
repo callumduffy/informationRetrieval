@@ -75,10 +75,10 @@ public class CranfieldQueryParser {
 	
 	public static Map<String, Float> boost(){
 		Map<String, Float> boostMap = new HashMap();
-		boostMap.put("title", (float) 0.40);
+		boostMap.put("title", (float) 0.48);
 		boostMap.put("author", (float) 0.1);
 		boostMap.put("bibliography", (float) 0.04);
-		boostMap.put("contents", (float) 0.46);
+		boostMap.put("contents", (float) 0.38);
 		return boostMap;
 	}
 }
