@@ -119,7 +119,7 @@ public class SearchEngine {
     		String line = (queryIndex) + " 0 " + hitDoc.get("fileNumber") + " " + (i+1) + " "
     				+ hits[i].score + " EXP" +" \n";
     		bw.write(line);
-    		System.out.println(line);
+    		//System.out.println(line);
     	}
      
     	if(queryIndex == 225){

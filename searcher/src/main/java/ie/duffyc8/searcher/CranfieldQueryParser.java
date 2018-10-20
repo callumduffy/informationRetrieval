@@ -19,7 +19,7 @@ public class CranfieldQueryParser {
 	
 	public CranfieldQueryParser(Analyzer analyzer){
 		 parser = new MultiFieldQueryParser(
-                new String[]{"title", "contents","bibl","author"},
+                new String[]{"title", "contents","bibliography","author"},
                 analyzer, boost());
 	}
 	
@@ -75,10 +75,10 @@ public class CranfieldQueryParser {
 	
 	public static Map<String, Float> boost(){
 		Map<String, Float> boostMap = new HashMap();
-		boostMap.put("title", (float) 0.48);
+		boostMap.put("title", (float) 0.40);
 		boostMap.put("author", (float) 0.1);
-		boostMap.put("bibl", (float) 0.04);
-		boostMap.put("contents", (float) 0.38);
+		boostMap.put("bibliography", (float) 0.04);
+		boostMap.put("contents", (float) 0.46);
 		return boostMap;
 	}
 }

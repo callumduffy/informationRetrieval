@@ -33,6 +33,7 @@ public class CranfieldParser {
 		BufferedReader bufferedReader = null;
 		String line;
 		boolean firstFile = true;
+		String data = "";
 		Integer counter = 1;
 		Document doc = new Document();
 		String type = "";
@@ -53,27 +54,101 @@ public class CranfieldParser {
 		try {
 			bufferedReader = new BufferedReader(new FileReader(new File(inputFile)));
 			bufferedReader.readLine();
-
+			//ad final file at the end, after loop
 			while ((line = bufferedReader.readLine()) != null) {
 				
-				if(line.startsWith(".I")){
+				type = getLineType(line);
+				
+				if(type == "index"){
 					if(!firstFile){
+						System.out.println(counter + ": contents : " + data);
+						doc.add(new Field("contents", data, ft));
 						iwriter.addDocument(doc);
 					}
-					doc = new Document();
 					firstFile =false;
+					doc = new Document();
 					doc.add(new StringField("fileNumber", counter.toString(), Field.Store.YES));
-					
-					//System.out.printf("Indexing \"%s\"\n", counter);
 					counter++;
 				}
-				else if(getLineType(line)==""){
-					doc.add(new Field(type, line, ft));
+				else if(type == "title"){
+					data ="";
+				}
+				else if(type == "author"){
+					System.out.println(counter + ": title : " + data);
+					doc.add(new Field("title", data, ft));
+					data="";
+				}
+				else if(type == "bibliography"){
+					System.out.println(counter + ": author : " + data);
+					doc.add(new Field("author", data, ft));
+					data="";
+				}
+				else if(type == "contents"){
+					System.out.println(counter + ": bibliography : " + data);
+					doc.add(new Field("bibliography", data, ft));
+					data="";
 				}
 				else{
-					type = getLineType(line);
+					data+=line + " ";
 				}
+				
+//				if(line.startsWith(".I") || type == "index"){
+//					doc = new Document();
+//					doc.add(new StringField("fileNumber", counter.toString(), Field.Store.YES));
+//					
+//					//System.out.printf("Indexing \"%s\"\n", counter);
+//					counter++;
+//				}
+//				if(line.startsWith(".T")){
+//					while(!((line = bufferedReader.readLine()).startsWith(".A"))){
+//						data+=line;
+//					}
+//					System.out.println(counter + ": title: " + data);
+//					doc.add(new Field("title", data, ft));
+//					data = "";
+//					type = "author";
+//				}
+//				else if(type == "author"){
+//					data = line;
+//					while(!((line = bufferedReader.readLine()).startsWith(".B"))){
+//						data+=line;
+//					}
+//					System.out.println("author: " + data);
+//					doc.add(new Field("author", data, ft));
+//					data = "";
+//					type = "bibliography";
+//				}
+//				else if(type == "bibliography"){
+//					data = line;
+//					while(!((line = bufferedReader.readLine()).startsWith(".W"))){
+//						data+=line;
+//					}
+//					System.out.println("bibliography: " + data);
+//					doc.add(new Field("bibliography", data, ft));
+//					data = "";
+//					type = "contents";
+//				}
+//				else if (type == "contents" ){
+//					data = line;
+//					while(!((line = bufferedReader.readLine()).startsWith(".I"))){
+//						data+=line;
+//					}
+//					System.out.println("contents: " + data);
+//					doc.add(new Field("contents", data, ft));
+//					iwriter.addDocument(doc);
+//					data = "";
+//					type = "index";
+//				}
+//				else{
+//					
+//				}
 			}
+			
+			//add final file
+			System.out.println(counter + ": contents : " + data);
+			doc.add(new Field("contents", data, ft));
+			iwriter.addDocument(doc);
+			
 			bufferedReader.close();
 	        iwriter.close();
 		}
@@ -102,6 +177,9 @@ public class CranfieldParser {
 		}
 		else if (line.startsWith(".W") ){
 			return "contents";
+		}
+		else if (line.startsWith(".I") ){
+			return "index";
 		}
 		else{
 			return "";
