@@ -1381,3 +1381,15 @@
 2018-10-20 14:10:21,406 [Worker-127] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\main\resources
 2018-10-20 14:10:21,438 [Worker-127] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2018-10-20 14:10:21,480 [Worker-127] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\test\resources
+2018-10-21 08:37:44,973 [Worker-140] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-21 08:37:44,974 [Worker-140] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\main\resources
+2018-10-21 08:37:44,978 [Worker-140] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-21 08:37:45,009 [Worker-140] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\test\resources
+2018-10-21 08:38:21,985 [Worker-138] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-21 08:38:21,987 [Worker-138] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\main\resources
+2018-10-21 08:38:22,043 [Worker-138] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-21 08:38:22,103 [Worker-138] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\test\resources
+2018-10-21 08:39:25,838 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-21 08:39:25,838 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\main\resources
+2018-10-21 08:39:25,842 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-21 08:39:25,858 [Worker-142] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Callum\Desktop\repo\informationRetrieval\searcher\src\test\resources

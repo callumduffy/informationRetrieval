@@ -59,8 +59,8 @@ public class SearchEngine {
     	querystrings = queryParser.readFile(CORPUS_DIRECTORY + "/cran.qry");
     	
     	//score the docs, leave one you want uncommented
-    	scoreDocs(BM_25, querystrings);
-    	//scoreDocs(VECTOR_SPACE_MODEL, querystrings);
+    	//scoreDocs(BM_25, querystrings);
+    	scoreDocs(VECTOR_SPACE_MODEL, querystrings);
     	
     	//at end
     	shutdown();
@@ -73,18 +73,19 @@ public class SearchEngine {
 		IndexSearcher isearcher = new IndexSearcher(ireader);
 		Query query;
 		int queryIndex = 1;
+		File fout = null;
     	
     	if(type == VECTOR_SPACE_MODEL){ //classic similarity implements TFIDF with VSP
     		isearcher.setSimilarity(new ClassicSimilarity());
+    		fout = new File("vsm_output.txt");
     	}
     	else if(type == BM_25){
     		isearcher.setSimilarity(new BM25Similarity());
+    		fout = new File("bm_25_output.txt");
     	}
     	else{
     		System.out.println("Invalid scoring integer param.");
     	}
-    	
-    	File fout = new File("search_results.txt");
 	     
     	 BufferedWriter bw = new BufferedWriter(new FileWriter(fout));
     	
